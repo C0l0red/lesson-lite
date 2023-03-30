@@ -1,0 +1,47 @@
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email"> Email </label>
+    <input type="email" id="email" formControlName="email" />
+
+    <div *ngIf="email.invalid && (email.touched || isSubmitted)">
+      <div *ngIf="email.errors?.['required']">Email is required</div>
+      <div *ngIf="email.errors?.['email']">Email is invalid</div>
+    </div>
+  </div>
+
+  <div>
+    <label for="fullName"> Full Name </label>
+    <input type="text" id="fullName" formControlName="fullName" />
+
+    <div *ngIf="fullName.invalid && (fullName.dirty || isSubmitted)">
+      <div *ngIf="fullName.errors?.['required']">Full Name is required</div>
+      <div *ngIf="fullName.errors?.['pattern']">
+        Full name must be two names of at least two letters each
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="password"> Password </label>
+    <input type="password" id="password" formControlName="password" />
+
+    <div *ngIf="password.invalid && (password.dirty || isSubmitted)">
+      <div *ngIf="password.errors?.['required']">Password is required</div>
+      <div *ngIf="password.errors?.['pattern']">
+        Password must be up to 8 characters, contain at least one upper case and
+        lower case letter, a number and a symbol
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <label for="role"> Role </label>
+    <select id="role" formControlName="role">
+      <option *ngFor="let role of roles" [value]="role.id">
+        {{ role.label }}
+      </option>
+    </select>
+  </div>
+
+  <button type="submit">Register</button>
+</form>
